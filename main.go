@@ -2,7 +2,7 @@
 //
 //   Command line system information tool using mathematical
 //   rose patterns generation in ASCII art.
-//	 Copyright (c) 2025, Emiliano Rizzonelli
+//   Copyright (c) 2025, Emiliano Rizzonelli
 //
 // More info: https://en.wikipedia.org/wiki/Rose_(mathematics)
 
