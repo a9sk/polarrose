@@ -9,9 +9,48 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"os"
+)
+
+// Options:
+// -color       color of the rose (ANSI color name)
+// -size        radius of the rose (default 20)
+// TODO: add more specific and cool flags for a nicer generation
+var (
+	size  = flag.Int("size", 20, "Size of the rose (radius)")
+	color = flag.String("color", "blue", "Color of the rose (ANSI color name)")
 )
 
 func main() {
-	fmt.Println("Why are you looking at the first commit????")
+	flag.Usage = func() {
+		fmt.Fprintf(flag.CommandLine.Output(), "\nUsage: rose [options]\n\n")
+		fmt.Fprintf(flag.CommandLine.Output(), "Options:\n\n")
+		flag.PrintDefaults()
+	}
+
+	// parse the flags before doing anything else
+	flag.Parse()
+
+	if *size <= 0 {
+		fmt.Printf("Error: Size must be a positive integer.\n")
+		return
+	}
+
+	if !colors[*color] {
+		fmt.Fprintf(os.Stderr, "Error: the selected \"%s\" color is not supported.\n", *color)
+	}
+}
+
+// list of supported colors. TODO: add more colors to this list, maybe move it somewhere better
+var colors = map[string]bool{
+	"black":   true,
+	"red":     true,
+	"green":   true,
+	"yellow":  true,
+	"blue":    true,
+	"magenta": true,
+	"cyan":    true,
+	"white":   true,
 }
