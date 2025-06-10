@@ -12,6 +12,9 @@ import (
 	"flag"
 	"fmt"
 	"os"
+
+	"github.com/a9sk/polarrose/cmd"
+	"github.com/a9sk/polarrose/internal/models"
 )
 
 // Options:
@@ -38,19 +41,9 @@ func main() {
 		return
 	}
 
-	if !colors[*color] {
+	if !models.Colors[*color] {
 		fmt.Fprintf(os.Stderr, "Error: the selected \"%s\" color is not supported.\n", *color)
 	}
-}
 
-// list of supported colors. TODO: add more colors to this list, maybe move it somewhere better
-var colors = map[string]bool{
-	"black":   true,
-	"red":     true,
-	"green":   true,
-	"yellow":  true,
-	"blue":    true,
-	"magenta": true,
-	"cyan":    true,
-	"white":   true,
+	cmd.Root()
 }
