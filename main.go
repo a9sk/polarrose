@@ -23,7 +23,7 @@ import (
 // -petals      number of petals (default 5)
 // TODO: add more specific and cool flags for a nicer generation
 var (
-	size   = flag.Int("size", 20, "Size of the rose (radius)")
+	size   = flag.Float64("size", 20, "Size of the rose (radius)")
 	color  = flag.String("color", "blue", "Color of the rose (ANSI color name)")
 	petals = flag.Int("petals", 5, "Number of petals (default 5)")
 )
@@ -52,5 +52,6 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error: the selected \"%s\" color is not supported.\n", *color)
 	}
 
-	cmd.Root()
+	// i have no idea whether i should use pointers or values here
+	cmd.Root(*size, *petals)
 }

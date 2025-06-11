@@ -9,15 +9,14 @@ import (
 const (
 	width  = 40
 	height = 20
-	a      = 10.0 // amplitude (radius) of the rose
-	k      = 7    // number of petals
 	steps  = 100000
 	char   = ':' // temprorary character for drawing
 )
 
-func Root() {
+func Root(size float64, petals int) {
+	// TODO: validate input, comes from main for now so no need to do that (validated there)
 
-	points := rose.GenerateRosePoints(a, k, steps)
+	points := rose.GenerateRosePoints(size, petals, steps)
 
-	render.DrawASCII(points, width, height, char, a)
+	render.DrawASCII(points, width, height, char, size)
 }
