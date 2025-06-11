@@ -20,10 +20,12 @@ import (
 // Options:
 // -color       color of the rose (ANSI color name)
 // -size        radius of the rose (default 20)
+// -petals      number of petals (default 5)
 // TODO: add more specific and cool flags for a nicer generation
 var (
-	size  = flag.Int("size", 20, "Size of the rose (radius)")
-	color = flag.String("color", "blue", "Color of the rose (ANSI color name)")
+	size   = flag.Int("size", 20, "Size of the rose (radius)")
+	color  = flag.String("color", "blue", "Color of the rose (ANSI color name)")
+	petals = flag.Int("petals", 5, "Number of petals (default 5)")
 )
 
 func main() {
@@ -38,6 +40,11 @@ func main() {
 
 	if *size <= 0 {
 		fmt.Printf("Error: Size must be a positive integer.\n")
+		return
+	}
+
+	if *petals <= 0 {
+		fmt.Printf("Error: Number of petals must be a positive integer.\n")
 		return
 	}
 
