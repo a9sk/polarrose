@@ -7,7 +7,7 @@ import (
 )
 
 // TODO: migrate width and height to terminal size detection (considering sysinfo)
-func DrawASCII(points []models.Point, w, h int, char rune, a float64) {
+func DrawASCII(points []models.Point, w, h int, char rune, a float64, c string) {
 
 	canvas := make([][]rune, h)
 	for i := range canvas {
@@ -26,7 +26,13 @@ func DrawASCII(points []models.Point, w, h int, char rune, a float64) {
 		}
 	}
 
+	// now this is a bit hacky, but it works
+	// TODO: change this to a global variable to switch colors when printing sysinfo
+	fmt.Print(models.ColorCodes[c])
 	for _, row := range canvas {
 		fmt.Println(string(row))
 	}
+
+	// reset color after drawing
+	fmt.Print(models.ColorCodes["reset"])
 }

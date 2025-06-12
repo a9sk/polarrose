@@ -53,5 +53,5 @@ func main() {
 	}
 
 	// i have no idea whether i should use pointers or values here
-	cmd.Root(*size, *petals)
+	cmd.Root(*size, *petals, *color)
 }

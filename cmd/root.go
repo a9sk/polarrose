@@ -13,10 +13,10 @@ const (
 	char   = ':' // temprorary character for drawing
 )
 
-func Root(size float64, petals int) {
+func Root(size float64, petals int, color string) {
 	// TODO: validate input, comes from main for now so no need to do that (validated there)
 
 	points := rose.GenerateRosePoints(size, petals, steps)
 
-	render.DrawASCII(points, width, height, char, size)
+	render.DrawASCII(points, width, height, char, size, color)
 }
