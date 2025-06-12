@@ -1,0 +1,22 @@
+main.go:
+
+// TODO: add more specific and cool flags for a nicer generation
+
+cmd\root.go:
+
+// TODO: migrate width and height to terminal size detection
+// TODO: validate input, comes from main for now so no need to do that (validated there)
+
+internal\models\color.go:
+  
+// TODO: add more colors to this list, maybe move it somewhere better
+
+internal\render\ascii.go:
+
+// TODO: migrate width and height to terminal size detection (considering sysinfo)
+// TODO: change this to a global variable to switch colors when printing sysinfo
+
+internal\terminal\size.go:
+
+// TODO: have listeners for terminal size changes
+// TODO: we want to limit the height of the terminal if it is too big
