@@ -27,7 +27,8 @@ func GetRoseSize() (int, int, error) {
 	if err != nil {
 		// panics are pretty neat if i understand correctly
 		// here it makes sense because we cannot do anything without a valid terminal size
-		panic(fmt.Sprintf("Error getting terminal size: %v", err))
+		// panic(fmt.Sprintf("Error getting terminal size: %v", err))
+		return 0, 0, fmt.Errorf("failed to get rose size: %w", err)
 	}
 
 	// the width is half the terminal to leave space for sysinfo
