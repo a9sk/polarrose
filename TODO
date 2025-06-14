@@ -1,3 +1,7 @@
+general
+
+// TODO: migrate the size flag to terminal size detection
+
 main.go:
 
 // TODO: add more specific and cool flags for a nicer generation
