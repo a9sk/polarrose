@@ -33,6 +33,5 @@ func GetRoseSize() (int, int, error) {
 
 	// the width is half the terminal to leave space for sysinfo
 	// the height is 85% of the terminal so that it fits nicely
-	// TODO: we want to limit the height of the terminal if it is too big
 	return w / 2, h - (h * 15 / 100), nil
 }

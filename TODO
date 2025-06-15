@@ -23,4 +23,7 @@ internal\render\ascii.go:
 internal\terminal\size.go:
 
 // TODO: have listeners for terminal size changes
-// TODO: we want to limit the height of the terminal if it is too big
+
+internal\models\info.go:
+
+// TODO: implement priority levels for Info

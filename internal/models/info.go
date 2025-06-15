@@ -12,3 +12,5 @@ type Info struct {
 	GPU      string
 	Memory   string
 }
+
+// TODO: implement priority levels for Info
