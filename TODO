@@ -27,3 +27,8 @@ internal\terminal\size.go:
 internal\models\info.go:
 
 // TODO: implement priority levels for Info
+
+internal\sysinfo\infos.go:
+
+// TODO: better error handling not limiting the previously fetched data
+// TODO: gather more information like CPU, GPU, Memory, etc.

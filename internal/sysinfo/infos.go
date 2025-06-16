@@ -27,6 +27,8 @@ import (
 // 	HostID               string `json:"hostId"`             // ex: uuid
 // }
 
+// TODO: better error handling not limiting the previously fetched data
+
 func GetSysInfo() (*models.Info, error) {
 	// i don't think this is how you do it
 	err := error(nil)
@@ -37,6 +39,8 @@ func GetSysInfo() (*models.Info, error) {
 	if err = getHostInfo(info); err != nil {
 		return nil, fmt.Errorf("failed to get host info: %w", err)
 	}
+
+	// TODO: gather more information like CPU, GPU, Memory, etc.
 
 	return info, nil
 }
