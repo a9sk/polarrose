@@ -10,6 +10,7 @@ import (
 )
 
 func GetFullSize() (int, int, error) {
+	// TODO: check why powershell does not work
 	w, h, err := term.GetSize(0) // standard input (stdin) sizes
 	if err != nil {
 		// maybe a panic might be good here, similar to GetRoseSize

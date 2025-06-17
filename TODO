@@ -8,7 +8,6 @@ main.go:
 
 cmd\root.go:
 
-// TODO: migrate width and height to terminal size detection
 // TODO: validate input, comes from main for now so no need to do that (validated there)
 
 internal\models\color.go:
@@ -23,6 +22,7 @@ internal\render\ascii.go:
 internal\terminal\size.go:
 
 // TODO: have listeners for terminal size changes
+// TODO: check why powershell does not work
 
 internal\models\info.go:
 
