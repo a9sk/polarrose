@@ -22,7 +22,6 @@ internal\render\ascii.go:
 internal\terminal\size.go:
 
 // TODO: have listeners for terminal size changes
-// TODO: check why powershell does not work
 
 internal\models\info.go:
 

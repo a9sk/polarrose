@@ -12,11 +12,25 @@ import (
 
 func GetFullSize() (int, int, error) {
 
-	// TODO: check why powershell does not work
-	setTerminalRaw()
+	// fd is the file descriptor for standard input
+	fd := int(os.Stdin.Fd())
 
-	w, h, err := term.GetSize(0) // standard input (stdin) sizes
+	// commenting out the setTerminalRaw function call
+	// because it is not needed for the terminal size detection itself
+	// setTerminalRaw()
+
+	w, h, err := term.GetSize(fd) // standard input (stdin) sizes
 	if err != nil {
+
+		// if stdin fails we can fallback to stdout
+		fd = int(os.Stdout.Fd())
+		w, h, err = term.GetSize(fd)
+
+		if err == nil {
+			// if we got the size from stdout, we can return it
+			return w, h, nil
+		}
+
 		// maybe a panic might be good here, similar to GetRoseSize
 		// (or maybe it is bad there)
 		return 0, 0, fmt.Errorf("failed to get terminal size: %w", err)
