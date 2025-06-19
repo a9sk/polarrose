@@ -5,6 +5,7 @@ import (
 
 	"github.com/a9sk/polarrose/internal/render"
 	"github.com/a9sk/polarrose/internal/rose"
+	"github.com/a9sk/polarrose/internal/sysinfo"
 	"github.com/a9sk/polarrose/internal/terminal"
 )
 
@@ -25,4 +26,6 @@ func Root(size float64, petals int, color string) {
 	}
 
 	render.DrawASCII(points, width, height, char, size, color)
+
+	fmt.Print(sysinfo.GetSysInfo())
 }
