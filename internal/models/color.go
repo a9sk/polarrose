@@ -1,5 +1,7 @@
 package models
 
+import "fmt"
+
 // list of supported colors. TODO: add more colors to this list, maybe move it somewhere better
 var Colors = map[string]bool{
 	"black":   true,
@@ -23,4 +25,16 @@ var ColorCodes = map[string]string{
 	"cyan":    "\033[36m",
 	"white":   "\033[37m",
 	"reset":   "\033[0m",
+}
+
+var CurrentColor = "white"
+
+func SetColor(c string) error {
+
+	if Colors[c] {
+		CurrentColor = c
+		return nil
+	}
+
+	return fmt.Errorf("invalid color: %s", c)
 }
