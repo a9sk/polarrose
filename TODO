@@ -31,3 +31,7 @@ internal\sysinfo\infos.go:
 
 // TODO: better error handling not limiting the previously fetched data
 // TODO: gather more information like CPU, GPU, Memory, etc.
+
+internal/rose/polar.go:
+
+// TODO: add a function that "fills" the points with ascii characters
