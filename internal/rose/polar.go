@@ -21,4 +21,4 @@ func GenerateRosePoints(a float64, k int, steps int) []models.Point {
 	return points
 }
 
-// TODO: add a function that "fills" the points with ascii characters
+// TODO: add a function that, given a list of points, returns the list of internal points
