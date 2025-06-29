@@ -26,3 +26,38 @@ Which is formed as follows:
 ```
 
 So the main problem here is that the points are appended to the points array without any real ordering based on the x or y values. I belive i could fix that and make the whole thing easier but i want it to be more of a challenge with myself.
+
+## Considerations
+
+I want to implement an algorithm that, given as an input a *[]models.Point* returns another *[]models.Point* containing all the internal points for the drawing.
+
+For the whole considerations i will be using this 2 petals (and therefore really 4 petals) rose as an example:
+
+```
+                         ::::::::::
+                       :::        :::
+                      ::            ::
+                      :              :
+                     ::              ::
+                     :                :
+                     ::              ::
+                      :              :
+                      ::            ::
+     ::::::::::::::    ::          ::    ::::::::::::::
+ :::::            :::::::::      :::::::::            :::::
+::                      ::::    ::::                      ::
+:                          ::::::                          :
+:                          ::::::                          :
+::                      ::::    ::::                      ::
+ :::::            :::::::::      :::::::::            :::::
+     ::::::::::::::    ::          ::    ::::::::::::::
+                      ::            ::
+                      :              :
+                     ::              ::
+                     :                :
+                     ::              ::
+                      :              :
+                      ::            ::
+                       :::        :::
+                         ::::::::::
+```
