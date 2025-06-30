@@ -39,3 +39,4 @@ internal/rose/polar.go:
 internal/render/fill.go:
 
 // TODO: add a function that "fills" the points with ascii characters (▓▒░ or ascii art???)
+// TODO: add some way a filling that uses gradients (like a heatmap)
