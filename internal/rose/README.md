@@ -125,3 +125,100 @@ By drawing both the external and internal point the final picture should be:
                        :::▓▓▓▓▓▓▓▓:::
                          ::::::::::
 ```
+
+The main thing we notice straight away is that the parts that are between the external points and one of the two lateral ends of the rose shall never be filled.
+
+
+```
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓::::::::::
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓:::        :::
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓::            ::
+etcetera              :              :
+                     ::              ::
+                     :                :
+                     ::              ::
+                      :              :
+                      ::            ::
+     ::::::::::::::    ::          ::    ::::::::::::::
+ :::::            :::::::::      :::::::::            :::::
+::                      ::::    ::::                      ::
+:                          ::::::                          :
+:                          ::::::                          :
+::                      ::::    ::::                      ::
+ :::::            :::::::::      :::::::::            :::::
+     ::::::::::::::    ::          ::    ::::::::::::::
+                      ::            ::
+                      :              :
+                     ::              ::
+                     :                :
+                     ::              ::
+                      :              :
+                      ::            ::
+                       :::        :::
+                         ::::::::::
+```
+
+So the first idea was to just look at a point and set as "toFill" the coordinates after it untill we find the next external point. If two external points are close we just iterate one more until we find a space, the next external point will be where we stop the filling process.
+
+
+```
+                         :::::::::: (this line has nothing to fill)
+we find this point ->  :::▓▓▓▓▓▓▓▓::: <- we finish here
+                      ::            ::
+                      :              :
+                     ::              ::
+                     :                :
+                     ::              ::
+                      :              :
+                      ::            ::
+     ::::::::::::::    ::          ::    ::::::::::::::
+ :::::            :::::::::      :::::::::            :::::
+::                      ::::    ::::                      ::
+:                          ::::::                          :
+:                          ::::::                          :
+::                      ::::    ::::                      ::
+ :::::            :::::::::      :::::::::            :::::
+     ::::::::::::::    ::          ::    ::::::::::::::
+                      ::            ::
+                      :              :
+                     ::              ::
+                     :                :
+                     ::              ::
+                      :              :
+                      ::            ::
+                       :::        :::
+                         ::::::::::
+```
+
+The output to this approach is not right tho.
+
+```
+                         ::::::::::
+                       :::▓▓▓▓▓▓▓▓:::
+                      ::▓▓▓▓▓▓▓▓▓▓▓▓::
+                      :▓▓▓▓▓▓▓▓▓▓▓▓▓▓:
+                     ::▓▓▓▓▓▓▓▓▓▓▓▓▓▓::
+                     :▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓: now this is not the most obvious of errors
+                     ::▓▓▓▓▓▓▓▓▓▓▓▓▓▓:: but with some more petals it is worse
+                      :▓▓▓▓▓▓▓▓▓▓▓▓▓▓:  |
+                      ::▓▓▓▓▓▓▓▓▓▓▓▓::  v
+     ::::::::::::::▓▓▓▓::▓▓▓▓▓▓▓▓▓▓::▓▓▓▓::::::::::::::
+ :::::▓▓▓▓▓▓▓▓▓▓▓▓:::::::::▓▓▓▓▓▓:::::::::▓▓▓▓▓▓▓▓▓▓▓▓:::::
+::▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓::::▓▓▓▓::::▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓::
+:▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓::::::▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓:
+:▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓::::::▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓:
+::▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓::::▓▓▓▓::::▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓::
+ :::::▓▓▓▓▓▓▓▓▓▓▓▓:::::::::▓▓▓▓▓▓:::::::::▓▓▓▓▓▓▓▓▓▓▓▓:::::
+     ::::::::::::::▓▓▓▓::▓▓▓▓▓▓▓▓▓▓::▓▓▓▓::::::::::::::
+                      ::▓▓▓▓▓▓▓▓▓▓▓▓::
+                      :▓▓▓▓▓▓▓▓▓▓▓▓▓▓:
+                     ::▓▓▓▓▓▓▓▓▓▓▓▓▓▓::
+                     :▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓:
+                     ::▓▓▓▓▓▓▓▓▓▓▓▓▓▓::
+                      :▓▓▓▓▓▓▓▓▓▓▓▓▓▓:
+                      ::▓▓▓▓▓▓▓▓▓▓▓▓::
+                       :::▓▓▓▓▓▓▓▓:::
+                         ::::::::::
+```
+
+We need to therefore find a way to avoid filling those points. At first i thought of a way to map the external points using a diffusion selector algoritm, and then when drawing you could just check if the point which you want to be drawing to is not an external one. This is not even close to the best solution.
