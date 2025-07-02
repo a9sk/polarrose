@@ -222,3 +222,5 @@ The output to this approach is not right tho.
 ```
 
 We need to therefore find a way to avoid filling those points. At first i thought of a way to map the external points using a diffusion selector algoritm, and then when drawing you could just check if the point which you want to be drawing to is not an external one. This is not even close to the best solution.
+
+The idea proposed is pretty simple to implement. Given an "empty rose" (only the external points) we could map it to a matrix and then use the matrix to find all of the "internal points of the rose".
