@@ -224,3 +224,21 @@ The output to this approach is not right tho.
 We need to therefore find a way to avoid filling those points. At first i thought of a way to map the external points using a diffusion selector algoritm, and then when drawing you could just check if the point which you want to be drawing to is not an external one. This is not even close to the best solution.
 
 The idea proposed is pretty simple to implement. Given an "empty rose" (only the external points) we could map it to a matrix and then use the matrix to find all of the "internal points of the rose".
+
+Given that the rose is formed by polar coordinates and results in a smooth, enclosed shape, it’s safe to assume the following:
+
+All external points are on the "outside".
+The corners of the screen are guaranteed to be outside the shape.
+Any space that is not reachable from the outside is therefore "inside".
+
+So instead of scanning and flipping flags (like traditional scanline fill algorithms), we can make a much simpler and more robust assumption:
+
+## The flood fill idea
+
+If we treat the entire grid as a 2D matrix of points, we can:
+
+Mark all the external points of the rose on a matrix.
+Flood fill starting from the corners of the screen.
+Any point that was *not* reached by the flood and is *not* on the boundary must be inside.
+
+We use a simple BFS to propagate from the corners. This is guaranteed to fill only the outside and never go inside, as long as the rose boundary is properly closed and connected.
