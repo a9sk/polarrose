@@ -242,3 +242,13 @@ Flood fill starting from the corners of the screen.
 Any point that was *not* reached by the flood and is *not* on the boundary must be inside.
 
 We use a simple BFS to propagate from the corners. This is guaranteed to fill only the outside and never go inside, as long as the rose boundary is properly closed and connected.
+
+## Grid Mapping
+
+First we need to map all floating-point coordinates to a discrete grid.
+
+We will:
+- Compute the bounding box (minX, maxX, minY, maxY).
+- Normalize the points to fit inside a fixed-size grid (e.g. 200x200).
+- Round the normalized float values to integers so they match grid cells.
+
