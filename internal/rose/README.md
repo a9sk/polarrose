@@ -252,3 +252,23 @@ We will:
 - Normalize the points to fit inside a fixed-size grid (e.g. 200x200).
 - Round the normalized float values to integers so they match grid cells.
 
+## Boundary Drawing
+
+The points produced by the rose equation are not necessarily adjacent on the grid. Therefore, we must connect them.
+
+To avoid holes in the boundary:
+- Iterate over the points.
+- For each point, draw a line to the next point (using a line algorithm like Bresenham or simple DDA).
+- Make sure to connect the last point back to the first.
+
+This ensures the boundary is complete and watertight.
+
+## Flood Fill
+
+After drawing the boundary, we:
+- Initialize a queue with the four corners of the grid: (0,0), (width-1,0), (0,height-1), (width-1,height-1)
+- Use BFS to explore all connected points that are NOT on the boundary and NOT already visited.
+- Mark these as "external" or "visited".
+
+After the BFS completes:
+- Any point that is NOT visited and NOT a boundary point is considered interior and is collected.
