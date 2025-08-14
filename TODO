@@ -40,3 +40,9 @@ internal/render/fill.go:
 
 // TODO: add a function that "fills" the points with ascii characters (▓▒░ or ascii art???)
 // TODO: add some way a filling that uses gradients (like a heatmap)
+
+internal/render/infos.go:
+
+// TODO: write the sysinfo next to the rose using the terminal.GetInfoPos() function
+// TODO: when writing the info, check the terminal size with terminal.GetFullSize()
+
