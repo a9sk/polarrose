@@ -34,8 +34,6 @@ internal\sysinfo\infos.go:
 
 internal/rose/polar.go:
 
-// TODO: add a function that, given a list of points, returns the list of internal points
-
 internal/render/fill.go:
 
 // TODO: add a function that "fills" the points with ascii characters (▓▒░ or ascii art???)

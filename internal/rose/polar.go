@@ -5,6 +5,7 @@ import (
 	"math"
 
 	"github.com/a9sk/polarrose/internal/models"
+	"github.com/a9sk/polarrose/internal/terminal"
 )
 
 // generates points for a rose curve in polar coordinates.
@@ -22,7 +23,75 @@ func GenerateRosePoints(a float64, k int, steps int) []models.Point {
 	return points
 }
 
-// TODO: add a function that, given a list of points, returns the list of internal points
+// holds the necessary parameters for mapping between float coordinates and grid coordinates.
+type gridConfig struct {
+	minX, maxX, minY, maxY float64
+	width, height          int
+	scaleX, scaleY         float64
+}
+
+func newGridConfig(externalPoints []models.Point, padding float64) (*gridConfig, error) {
+	if len(externalPoints) == 0 {
+		return nil, fmt.Errorf("externalPoints cannot be empty")
+	}
+
+	// get terminal-calculated rose display size
+	terminalWidth, terminalHeight, err := terminal.GetRoseSize()
+	if err != nil {
+		return nil, fmt.Errorf("failed to get terminal rose size for grid config: %w", err)
+	}
+
+	// compute Bounding Box
+	minX, maxX := externalPoints[0].X, externalPoints[0].X
+	minY, maxY := externalPoints[0].Y, externalPoints[0].Y
+	for _, p := range externalPoints {
+		if p.X < minX {
+			minX = p.X
+		}
+		if p.X > maxX {
+			maxX = p.X
+		}
+		if p.Y < minY {
+			minY = p.Y
+		}
+		if p.Y > maxY {
+			maxY = p.Y
+		}
+	}
+
+	// add padding to the bounding box
+	minX -= padding
+	maxX += padding
+	minY -= padding
+	maxY += padding
+
+	// use terminal-calculated dimensions for the grid
+	width := terminalWidth
+	height := terminalHeight
+
+	// scale factors for mapping float coordinates to grid integers
+	// ensure maxX-minX and maxY-minY are not zero to prevent division by zero
+	rangeX := maxX - minX
+	rangeY := maxY - minY
+
+	if rangeX == 0 || rangeY == 0 {
+		return nil, fmt.Errorf("bounding box has zero range, cannot scale")
+	}
+
+	scaleX := float64(width-1) / rangeX
+	scaleY := float64(height-1) / rangeY
+
+	return &gridConfig{
+		minX:   minX,
+		maxX:   maxX,
+		minY:   minY,
+		maxY:   maxY,
+		width:  width,
+		height: height,
+		scaleX: scaleX,
+		scaleY: scaleY,
+	}, nil
+}
 
 // calculates and returns the internal points of a rose curve.
 func GetInternalPoints(externalPoints []models.Point) []models.Point {
