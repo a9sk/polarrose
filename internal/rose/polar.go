@@ -30,6 +30,24 @@ type gridConfig struct {
 	scaleX, scaleY         float64
 }
 
+// convert a float point to grid coordinates.
+func (gc *gridConfig) toGridCoords(p models.Point) (int, int) {
+	gx := int(math.Round((p.X - gc.minX) * gc.scaleX))
+	gy := int(math.Round((p.Y - gc.minY) * gc.scaleY))
+	// we need to ensure coordinates are within grid bounds
+	if gx < 0 {
+		gx = 0
+	} else if gx >= gc.width {
+		gx = gc.width - 1
+	}
+	if gy < 0 {
+		gy = 0
+	} else if gy >= gc.height {
+		gy = gc.height - 1
+	}
+	return gx, gy
+}
+
 func newGridConfig(externalPoints []models.Point, padding float64) (*gridConfig, error) {
 	if len(externalPoints) == 0 {
 		return nil, fmt.Errorf("externalPoints cannot be empty")
