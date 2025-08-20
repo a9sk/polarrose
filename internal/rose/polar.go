@@ -48,6 +48,13 @@ func (gc *gridConfig) toGridCoords(p models.Point) (int, int) {
 	return gx, gy
 }
 
+// convertt grid coordinates back to float points.
+func (gc *gridConfig) fromGridCoords(gx, gy int) models.Point {
+	x := float64(gx)/gc.scaleX + gc.minX
+	y := float64(gy)/gc.scaleY + gc.minY
+	return models.Point{X: x, Y: y}
+}
+
 func newGridConfig(externalPoints []models.Point, padding float64) (*gridConfig, error) {
 	if len(externalPoints) == 0 {
 		return nil, fmt.Errorf("externalPoints cannot be empty")
