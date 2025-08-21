@@ -21,11 +21,15 @@ func Root(size float64, petals int, color string) {
 
 	width, height, err := terminal.GetRoseSize()
 	if err != nil {
-		fmt.Printf(fmt.Sprintf("[FAIL] in TERMINAL: %v", err))
-		return
+		panic(fmt.Sprintf("[FAIL] in TERMINAL: %v", err))
 	}
 
 	render.DrawASCII(points, width, height, char, size, color)
 
-	fmt.Print(sysinfo.GetSysInfo())
+	infos, err := sysinfo.GetSysInfo()
+	if err != nil {
+		panic(fmt.Sprintf("[FAIL] in SYSINFO: %v", err))
+	}
+
+	render.DrawInfo(infos)
 }
