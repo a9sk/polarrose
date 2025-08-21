@@ -55,6 +55,37 @@ func (gc *gridConfig) fromGridCoords(gx, gy int) models.Point {
 	return models.Point{X: x, Y: y}
 }
 
+// uses a simple DDA-like algorithm to mark points on the grid between two given points.
+func drawLineOnGrid(grid [][]bool, gc *gridConfig, p1, p2 models.Point) {
+	x1, y1 := gc.toGridCoords(p1)
+	x2, y2 := gc.toGridCoords(p2)
+
+	dx := x2 - x1
+	dy := y2 - y1
+	steps := int(math.Abs(float64(dx)))
+	if int(math.Abs(float64(dy))) > steps {
+		steps = int(math.Abs(float64(dy)))
+	}
+
+	if steps == 0 { // p1 and p2 are the same grid point
+		if x1 >= 0 && x1 < gc.width && y1 >= 0 && y1 < gc.height {
+			grid[y1][x1] = true
+		}
+		return
+	}
+
+	xIncrement := float64(dx) / float64(steps)
+	yIncrement := float64(dy) / float64(steps)
+
+	for s := 0; s <= steps; s++ {
+		currX := int(math.Round(float64(x1) + float64(s)*xIncrement))
+		currY := int(math.Round(float64(y1) + float64(s)*yIncrement))
+		if currX >= 0 && currX < gc.width && currY >= 0 && currY < gc.height {
+			grid[currY][currX] = true
+		}
+	}
+}
+
 func newGridConfig(externalPoints []models.Point, padding float64) (*gridConfig, error) {
 	if len(externalPoints) == 0 {
 		return nil, fmt.Errorf("externalPoints cannot be empty")
