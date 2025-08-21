@@ -30,62 +30,7 @@ type gridConfig struct {
 	scaleX, scaleY         float64
 }
 
-// convert a float point to grid coordinates.
-func (gc *gridConfig) toGridCoords(p models.Point) (int, int) {
-	gx := int(math.Round((p.X - gc.minX) * gc.scaleX))
-	gy := int(math.Round((p.Y - gc.minY) * gc.scaleY))
-	// we need to ensure coordinates are within grid bounds
-	if gx < 0 {
-		gx = 0
-	} else if gx >= gc.width {
-		gx = gc.width - 1
-	}
-	if gy < 0 {
-		gy = 0
-	} else if gy >= gc.height {
-		gy = gc.height - 1
-	}
-	return gx, gy
-}
-
-// convertt grid coordinates back to float points.
-func (gc *gridConfig) fromGridCoords(gx, gy int) models.Point {
-	x := float64(gx)/gc.scaleX + gc.minX
-	y := float64(gy)/gc.scaleY + gc.minY
-	return models.Point{X: x, Y: y}
-}
-
-// uses a simple DDA-like algorithm to mark points on the grid between two given points.
-func drawLineOnGrid(grid [][]bool, gc *gridConfig, p1, p2 models.Point) {
-	x1, y1 := gc.toGridCoords(p1)
-	x2, y2 := gc.toGridCoords(p2)
-
-	dx := x2 - x1
-	dy := y2 - y1
-	steps := int(math.Abs(float64(dx)))
-	if int(math.Abs(float64(dy))) > steps {
-		steps = int(math.Abs(float64(dy)))
-	}
-
-	if steps == 0 { // p1 and p2 are the same grid point
-		if x1 >= 0 && x1 < gc.width && y1 >= 0 && y1 < gc.height {
-			grid[y1][x1] = true
-		}
-		return
-	}
-
-	xIncrement := float64(dx) / float64(steps)
-	yIncrement := float64(dy) / float64(steps)
-
-	for s := 0; s <= steps; s++ {
-		currX := int(math.Round(float64(x1) + float64(s)*xIncrement))
-		currY := int(math.Round(float64(y1) + float64(s)*yIncrement))
-		if currX >= 0 && currX < gc.width && currY >= 0 && currY < gc.height {
-			grid[currY][currX] = true
-		}
-	}
-}
-
+// creates a new grid configuration based on the external points and padding.
 func newGridConfig(externalPoints []models.Point, padding float64) (*gridConfig, error) {
 	if len(externalPoints) == 0 {
 		return nil, fmt.Errorf("externalPoints cannot be empty")
@@ -147,6 +92,62 @@ func newGridConfig(externalPoints []models.Point, padding float64) (*gridConfig,
 		scaleX: scaleX,
 		scaleY: scaleY,
 	}, nil
+}
+
+// convert a float point to grid coordinates.
+func (gc *gridConfig) toGridCoords(p models.Point) (int, int) {
+	gx := int(math.Round((p.X - gc.minX) * gc.scaleX))
+	gy := int(math.Round((p.Y - gc.minY) * gc.scaleY))
+	// we need to ensure coordinates are within grid bounds
+	if gx < 0 {
+		gx = 0
+	} else if gx >= gc.width {
+		gx = gc.width - 1
+	}
+	if gy < 0 {
+		gy = 0
+	} else if gy >= gc.height {
+		gy = gc.height - 1
+	}
+	return gx, gy
+}
+
+// convertt grid coordinates back to float points.
+func (gc *gridConfig) fromGridCoords(gx, gy int) models.Point {
+	x := float64(gx)/gc.scaleX + gc.minX
+	y := float64(gy)/gc.scaleY + gc.minY
+	return models.Point{X: x, Y: y}
+}
+
+// uses a simple DDA-like algorithm to mark points on the grid between two given points.
+func drawLineOnGrid(grid [][]bool, gc *gridConfig, p1, p2 models.Point) {
+	x1, y1 := gc.toGridCoords(p1)
+	x2, y2 := gc.toGridCoords(p2)
+
+	dx := x2 - x1
+	dy := y2 - y1
+	steps := int(math.Abs(float64(dx)))
+	if int(math.Abs(float64(dy))) > steps {
+		steps = int(math.Abs(float64(dy)))
+	}
+
+	if steps == 0 { // p1 and p2 are the same grid point
+		if x1 >= 0 && x1 < gc.width && y1 >= 0 && y1 < gc.height {
+			grid[y1][x1] = true
+		}
+		return
+	}
+
+	xIncrement := float64(dx) / float64(steps)
+	yIncrement := float64(dy) / float64(steps)
+
+	for s := 0; s <= steps; s++ {
+		currX := int(math.Round(float64(x1) + float64(s)*xIncrement))
+		currY := int(math.Round(float64(y1) + float64(s)*yIncrement))
+		if currX >= 0 && currX < gc.width && currY >= 0 && currY < gc.height {
+			grid[currY][currX] = true
+		}
+	}
 }
 
 // calculates and returns the internal points of a rose curve.
