@@ -17,6 +17,9 @@ const (
 func Root(size float64, petals int, color string) {
 	// TODO: validate input, comes from main for now so no need to do that (validated there)
 
+	// clear the terminal before drawing
+	fmt.Print("\033[H\033[2J")
+
 	width, height, err := terminal.GetRoseSize()
 	if err != nil {
 		panic(fmt.Sprintf("[FAIL] in TERMINAL: %v", err))
@@ -41,4 +44,10 @@ func Root(size float64, petals int, color string) {
 
 	// show the system information
 	render.DrawInfo(infos)
+
+	width, height, err = terminal.GetFullSize()
+	if err != nil {
+		panic(fmt.Sprintf("[FAIL] in TERMINAL: %v", err))
+	}
+	fmt.Printf("\033[%d;%dH", height, width)
 }

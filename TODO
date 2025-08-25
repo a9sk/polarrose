@@ -44,4 +44,5 @@ internal/render/infos.go:
 
 // TODO: write the sysinfo next to the rose using the terminal.GetInfoPos() function
 // TODO: when writing the info, check the terminal size with terminal.GetFullSize()
-
+// TODO: move this to internal/terminal function (ANSI escape code: \033[row;colH)
+// TODO: the info should be printed in the center of the available space, not at the top
