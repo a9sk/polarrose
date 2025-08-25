@@ -24,11 +24,15 @@ func Root(size float64, petals int, color string) {
 
 	// show the external points
 	points := rose.GenerateRosePoints(size, petals, steps)
-	render.DrawASCII(points, width, height, char, size, color)
+	// render.DrawASCII(points, width, height, char, size, color)
 
 	// show the internal points
 	pointsIn := rose.GetInternalPoints(points)
-	render.DrawASCII(pointsIn, width, height, char, size, color)
+	// render.DrawASCII(pointsIn, width, height, char, size, color)
+
+	// show the whole points
+	pointsAll := append(points, pointsIn...)
+	render.DrawASCII(pointsAll, width, height, char, size, color)
 
 	infos, err := sysinfo.GetSysInfo()
 	if err != nil {
