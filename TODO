@@ -13,6 +13,7 @@ cmd\root.go:
 internal\models\color.go:
   
 // TODO: add more colors to this list, maybe move it somewhere better
+// TODO: add function to find inverse color (for and from background)
 
 internal\render\ascii.go:
 

@@ -38,3 +38,5 @@ func SetColor(c string) error {
 
 	return fmt.Errorf("invalid color: %s", c)
 }
+
+// TODO: add function to find inverse color (for and from background)

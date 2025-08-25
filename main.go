@@ -24,7 +24,7 @@ import (
 // TODO: add more specific and cool flags for a nicer generation
 var (
 	size   = flag.Float64("size", 20, "Size of the rose (radius)")
-	color  = flag.String("color", "blue", "Color of the rose (ANSI color name)")
+	color  = flag.String("color", models.CurrentColor, "Color of the rose (ANSI color name)")
 	petals = flag.Int("petals", 5, "Number of petals (default 5)")
 )
 
