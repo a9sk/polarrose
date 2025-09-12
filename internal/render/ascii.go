@@ -6,7 +6,6 @@ import (
 	"github.com/a9sk/polarrose/internal/models"
 )
 
-// TODO: migrate width and height to terminal size detection (considering sysinfo)
 func DrawASCII(points []models.Point, w, h int, char rune, a float64, c string) {
 
 	canvas := make([][]rune, h)
@@ -27,7 +26,6 @@ func DrawASCII(points []models.Point, w, h int, char rune, a float64, c string) 
 	}
 
 	// now this is a bit hacky, but it works
-	// TODO: change this to a global variable to switch colors when printing sysinfo
 	fmt.Print(models.ColorCodes[c])
 	for _, row := range canvas {
 		fmt.Println(string(row))

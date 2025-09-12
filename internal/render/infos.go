@@ -8,8 +8,6 @@ import (
 )
 
 func DrawInfo(infos *models.Info) {
-	// TODO: write the sysinfo next to the rose using the terminal.GetInfoPos() function
-	// TODO: when writing the info, check the terminal size with terminal.GetFullSize()
 
 	// fmt.Print(infos)
 
@@ -20,7 +18,6 @@ func DrawInfo(infos *models.Info) {
 	// if err != nil { return }
 
 	// TODO: move this to internal/terminal function (ANSI escape code: \033[row;colH)
-	// TODO: the info should be printed in the center of the available space, not at the top
 	fmt.Printf("\033[%d;%dH", row, col)
 
 	// print sysinfo in a formatted way, using color if desired

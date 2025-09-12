@@ -1,6 +1,7 @@
 general
 
 // TODO: migrate the size flag to terminal size detection
+// TODO: integrate config saving using .json file
 
 main.go:
 
@@ -16,9 +17,6 @@ internal\models\color.go:
 // TODO: add function to find inverse color (for and from background)
 
 internal\render\ascii.go:
-
-// TODO: migrate width and height to terminal size detection (considering sysinfo)
-// TODO: change this to a global variable to switch colors when printing sysinfo
 
 internal\terminal\size.go:
 
@@ -42,7 +40,4 @@ internal/render/fill.go:
 
 internal/render/infos.go:
 
-// TODO: write the sysinfo next to the rose using the terminal.GetInfoPos() function
-// TODO: when writing the info, check the terminal size with terminal.GetFullSize()
 // TODO: move this to internal/terminal function (ANSI escape code: \033[row;colH)
-// TODO: the info should be printed in the center of the available space, not at the top
