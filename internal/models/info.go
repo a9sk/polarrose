@@ -13,4 +13,10 @@ type Info struct {
 	Memory   string
 }
 
+var nInfo = 10 //! remember to update if adding more info fields
+
+func GetNInfo() int {
+	return nInfo
+}
+
 // TODO: implement priority levels for Info

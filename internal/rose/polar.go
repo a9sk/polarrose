@@ -237,3 +237,9 @@ func GetInternalPoints(externalPoints []models.Point) []models.Point {
 
 	return internalPoints
 }
+
+// calculates and returns the external points of a rose curve.
+func GetExternalPoints(points []models.Point) []models.Point {
+	// we might want to use it for rendering or other purposes, placeholder for now
+	return points
+}

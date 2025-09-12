@@ -52,7 +52,8 @@ func GetRoseSize() (int, int, error) {
 
 	// the width is half the terminal to leave space for sysinfo
 	// the height is 85% of the terminal so that it fits nicely
-	return w / 2, h - (h * 15 / 100), nil
+	// return w / 2, h - (h * 15 / 100), nil
+	return w / 2, h, nil
 }
 
 func setTerminalRaw() {
