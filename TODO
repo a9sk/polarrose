@@ -1,5 +1,6 @@
 general
 
+// TODO: add logging with -v flag (verbose) !!!!!!!!!
 // TODO: migrate the size flag to terminal size detection
 // TODO: integrate config saving using .json file
 
@@ -20,6 +21,7 @@ internal\render\ascii.go:
 
 internal\terminal\size.go:
 
+// TODO: spin the return around
 // TODO: have listeners for terminal size changes
 
 internal\models\info.go:

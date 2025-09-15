@@ -10,6 +10,8 @@ import (
 	"golang.org/x/term"
 )
 
+// TODO: spin the return around
+// returns width (col), height(row) and error if not nil
 func GetFullSize() (int, int, error) {
 
 	// fd is the file descriptor for standard input
@@ -40,6 +42,8 @@ func GetFullSize() (int, int, error) {
 	return w, h, nil
 }
 
+// TODO: spin the return around
+// returns width (col), height(row) and error if not nil
 func GetRoseSize() (int, int, error) {
 	w, h, err := GetFullSize()
 
