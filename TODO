@@ -41,5 +41,3 @@ internal/render/fill.go:
 // TODO: add some way a filling that uses gradients (like a heatmap)
 
 internal/render/infos.go:
-
-// TODO: move this to internal/terminal function (ANSI escape code: \033[row;colH)

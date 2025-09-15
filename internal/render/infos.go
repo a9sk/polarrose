@@ -17,32 +17,53 @@ func DrawInfo(infos *models.Info) {
 	// w, h, err := terminal.GetFullSize()
 	// if err != nil { return }
 
-	// TODO: move this to internal/terminal function (ANSI escape code: \033[row;colH)
-	fmt.Printf("\033[%d;%dH", row, col)
+	if err := terminal.MovCursor(row, col); err != nil {
+		panic(fmt.Errorf("%s", err))
+	}
 
 	// print sysinfo in a formatted way, using color if desired
 	// fmt.Print(models.ColorCodes[models.CurrentColor])
 	fmt.Print(models.ColorCodes["cyan"])
 	fmt.Printf("System Info:\n")
-	fmt.Printf("\033[%d;%dH", row+1, col)
+	if err := terminal.MovCursor(row+1, col); err != nil {
+		panic(fmt.Errorf("%s", err))
+	}
 	fmt.Printf("OS:       %s\n", infos.OS)
-	fmt.Printf("\033[%d;%dH", row+2, col)
+	if err := terminal.MovCursor(row+2, col); err != nil {
+		panic(fmt.Errorf("%s", err))
+	}
 	fmt.Printf("Arch:     %s\n", infos.Arch)
-	fmt.Printf("\033[%d;%dH", row+3, col)
+	if err := terminal.MovCursor(row+3, col); err != nil {
+		panic(fmt.Errorf("%s", err))
+	}
 	fmt.Printf("Kernel:   %s\n", infos.Kernel)
-	fmt.Printf("\033[%d;%dH", row+4, col)
+	if err := terminal.MovCursor(row+4, col); err != nil {
+		panic(fmt.Errorf("%s", err))
+	}
 	fmt.Printf("Version:  %s\n", infos.Version)
-	fmt.Printf("\033[%d;%dH", row+5, col)
+	if err := terminal.MovCursor(row+5, col); err != nil {
+		panic(fmt.Errorf("%s", err))
+	}
 	fmt.Printf("Uptime:   %s\n", infos.Uptime)
-	fmt.Printf("\033[%d;%dH", row+6, col)
+	if err := terminal.MovCursor(row+6, col); err != nil {
+		panic(fmt.Errorf("%s", err))
+	}
 	fmt.Printf("Hostname: %s\n", infos.Hostname)
-	fmt.Printf("\033[%d;%dH", row+7, col)
+	if err := terminal.MovCursor(row+7, col); err != nil {
+		panic(fmt.Errorf("%s", err))
+	}
 	fmt.Printf("Platform: %s\n", infos.Platform)
-	fmt.Printf("\033[%d;%dH", row+8, col)
+	if err := terminal.MovCursor(row+8, col); err != nil {
+		panic(fmt.Errorf("%s", err))
+	}
 	fmt.Printf("CPU:      %s\n", infos.CPU)
-	fmt.Printf("\033[%d;%dH", row+9, col)
+	if err := terminal.MovCursor(row+9, col); err != nil {
+		panic(fmt.Errorf("%s", err))
+	}
 	fmt.Printf("GPU:      %s\n", infos.GPU)
-	fmt.Printf("\033[%d;%dH", row+10, col)
+	if err := terminal.MovCursor(row+10, col); err != nil {
+		panic(fmt.Errorf("%s", err))
+	}
 	fmt.Printf("Memory:   %s\n", infos.Memory)
 	fmt.Print(models.ColorCodes["reset"])
 }
