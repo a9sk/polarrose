@@ -33,6 +33,10 @@ internal\sysinfo\infos.go:
 // TODO: better error handling not limiting the previously fetched data
 // TODO: gather more information like CPU, GPU, Memory, etc.
 
+internal\sysinfo\host.go:
+
+// TODO: parse uptime
+
 internal/rose/polar.go:
 
 internal/render/fill.go:

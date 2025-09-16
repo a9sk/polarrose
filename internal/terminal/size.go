@@ -39,7 +39,8 @@ func GetFullSize() (int, int, error) {
 	}
 
 	// fmt.Printf("terminal size: %d x %d\n", w, h)
-	return w, h, nil
+	// HACK: returns height -3 so that the new terminal input line is shown at the bottom
+	return w, h - 3, nil
 }
 
 // TODO: spin the return around

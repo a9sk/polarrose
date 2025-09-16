@@ -36,6 +36,7 @@ func getHostInfo(info *models.Info) error {
 
 	info.Hostname = hostInfo.Hostname
 
+	// TODO: parse uptime
 	info.Uptime = fmt.Sprintf("%d", hostInfo.Uptime) // parse to string
 
 	info.OS = hostInfo.OS
