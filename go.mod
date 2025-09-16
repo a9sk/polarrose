@@ -6,6 +6,7 @@ go 1.23.0
 toolchain go1.23.10
 
 require (
+	github.com/shirou/gopsutil v3.21.11+incompatible
 	github.com/shirou/gopsutil/v4 v4.25.5
 	golang.org/x/term v0.32.0
 )

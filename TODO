@@ -37,6 +37,10 @@ internal\sysinfo\host.go:
 
 // TODO: parse uptime
 
+internal/sysinfo/cpu.go
+
+// TODO: retrive and parse more CPUs related informations
+
 internal/rose/polar.go:
 
 internal/render/fill.go:

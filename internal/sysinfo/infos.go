@@ -19,6 +19,10 @@ func GetSysInfo() (*models.Info, error) {
 		return nil, fmt.Errorf("failed to get host info: %w", err)
 	}
 
+	if err = getCPUInfo(info); err != nil {
+		return nil, fmt.Errorf("failed to get host info: %w", err)
+	}
+
 	// TODO: gather more information like CPU, GPU, Memory, etc.
 
 	return info, nil
