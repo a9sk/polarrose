@@ -34,6 +34,7 @@ func getCPUInfo(info *models.Info) error {
 		return err
 	}
 
+	// TODO: count the cores
 	if len(cpuInfo) > 0 {
 		info.CPU = fmt.Sprintf("%d", len(cpuInfo))
 	} else {

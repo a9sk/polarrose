@@ -16,6 +16,7 @@ import (
 	"github.com/a9sk/polarrose/cmd"
 	"github.com/a9sk/polarrose/internal/models"
 	"github.com/a9sk/polarrose/internal/render"
+	"github.com/a9sk/polarrose/internal/terminal"
 )
 
 // Options:
@@ -28,7 +29,7 @@ var (
 	size      = flag.Float64("size", 20, "Size of the rose (radius)")
 	color     = flag.String("color", models.CurrentColor, "Color of the rose (ANSI color name)")
 	petals    = flag.Int("petals", 5, "Number of petals (default 5)")
-	nocredits = flag.Bool("nocredits", false, "If used removes the watermark from the generation")
+	nocredits = flag.Bool("nocredits", true, "If used removes the watermark from the generation")
 )
 
 func main() {
@@ -63,4 +64,11 @@ func main() {
 			panic(fmt.Errorf("panic:%s", err))
 		}
 	}
+
+	_, h, err := terminal.GetFullSize()
+	if err != nil {
+		panic(fmt.Sprintf("[FAIL] in TERMINAL: %v", err))
+	}
+	fmt.Printf("\033[%d;%dH", h+1, 0)
+
 }
