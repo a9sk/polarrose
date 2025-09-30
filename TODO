@@ -39,9 +39,6 @@ internal\sysinfo\host.go:
 
 internal/sysinfo/cpu.go
 
-// TODO: count the cores
-// TODO: retrive and parse more CPUs related informations
-
 internal/rose/polar.go:
 
 internal/render/fill.go:

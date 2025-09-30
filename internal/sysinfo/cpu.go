@@ -2,6 +2,7 @@ package sysinfo
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/a9sk/polarrose/internal/models"
 	"github.com/shirou/gopsutil/cpu"
@@ -34,14 +35,27 @@ func getCPUInfo(info *models.Info) error {
 		return err
 	}
 
-	// TODO: count the cores
 	if len(cpuInfo) > 0 {
+		// CPU count (logical cores/threads)
 		info.CPU = fmt.Sprintf("%d", len(cpuInfo))
-	} else {
-		info.CPU = ""
-	}
 
-	// TODO: retrive and parse more CPUs related informations
+		// CPU model name
+		info.CPUModel = cpuInfo[0].ModelName
+
+		// Physical cores
+		info.CPUCores = strconv.Itoa(int(cpuInfo[0].Cores))
+
+		// Logical processors (threads)
+		logicalCount, err := cpu.Counts(true)
+		if err == nil {
+			info.CPUThreads = strconv.Itoa(logicalCount)
+		}
+	} else {
+		info.CPU = "Unknown"
+		info.CPUModel = "Unknown"
+		info.CPUCores = "Unknown"
+		info.CPUThreads = "Unknown"
+	}
 
 	return nil
 }
