@@ -16,11 +16,15 @@ func GetSysInfo() (*models.Info, error) {
 	info := &models.Info{}
 
 	if err = getHostInfo(info); err != nil {
-		return nil, fmt.Errorf("failed to get host info: %w", err)
+		return nil, fmt.Errorf("failed to get [host] info: %w", err)
 	}
 
 	if err = getCPUInfo(info); err != nil {
-		return nil, fmt.Errorf("failed to get host info: %w", err)
+		return nil, fmt.Errorf("failed to get [CPU] info: %w", err)
+	}
+
+	if err = getMemoryInfo(info); err != nil {
+		return nil, fmt.Errorf("failed to get [memory] info: %w", err)
 	}
 
 	// TODO: gather more information like CPU, GPU, Memory, etc.
