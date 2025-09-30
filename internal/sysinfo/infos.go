@@ -31,7 +31,9 @@ func GetSysInfo() (*models.Info, error) {
 		return nil, fmt.Errorf("failed to get [storage] info: %w", err)
 	}
 
-	// TODO: gather more information like CPU, GPU, Memory, etc.
+	// GPU info is more complex and platform-specific
+	// For now, i will set it as a placeholder
+	info.GPU = "Not implemented yet"
 
 	return info, nil
 }
