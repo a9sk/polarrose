@@ -36,8 +36,7 @@ func getHostInfo(info *models.Info) error {
 
 	info.Hostname = hostInfo.Hostname
 
-	// TODO: parse uptime
-	info.Uptime = fmt.Sprintf("%d", hostInfo.Uptime) // parse to string
+	info.Uptime = parseUptime(hostInfo.Uptime)
 
 	info.OS = hostInfo.OS
 
@@ -50,4 +49,22 @@ func getHostInfo(info *models.Info) error {
 	info.Version = hostInfo.PlatformVersion
 
 	return nil
+}
+
+func parseUptime(uptimeSeconds uint64) string {
+	// convert uptime in seconds to a human-readable format
+	days := uptimeSeconds / 86400
+	hours := (uptimeSeconds % 86400) / 3600
+	minutes := (uptimeSeconds % 3600) / 60
+	seconds := uptimeSeconds % 60
+
+	if days > 0 {
+		return fmt.Sprintf("%dd %dh %dm %ds", days, hours, minutes, seconds)
+	} else if hours > 0 {
+		return fmt.Sprintf("%dh %dm %ds", hours, minutes, seconds)
+	} else if minutes > 0 {
+		return fmt.Sprintf("%dm %ds", minutes, seconds)
+	} else {
+		return fmt.Sprintf("%ds", seconds)
+	}
 }

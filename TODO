@@ -32,8 +32,6 @@ internal\sysinfo\infos.go:
 
 internal\sysinfo\host.go:
 
-// TODO: parse uptime
-
 internal/sysinfo/cpu.go
 
 internal/rose/polar.go:
