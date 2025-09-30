@@ -27,6 +27,10 @@ func GetSysInfo() (*models.Info, error) {
 		return nil, fmt.Errorf("failed to get [memory] info: %w", err)
 	}
 
+	if err = getStorageInfo(info); err != nil {
+		return nil, fmt.Errorf("failed to get [storage] info: %w", err)
+	}
+
 	// TODO: gather more information like CPU, GPU, Memory, etc.
 
 	return info, nil
