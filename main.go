@@ -1,4 +1,4 @@
-// polarrose -- v0.1.0 -- polar rose pattern generator
+// polarrose -- v1.0.0 -- polar rose pattern generator
 //
 //   Command line system information tool using mathematical
 //   rose patterns generation in ASCII art.
