@@ -2,7 +2,6 @@ package sysinfo
 
 import (
 	"fmt"
-	"strconv"
 
 	"github.com/a9sk/polarrose/internal/models"
 	"github.com/shirou/gopsutil/cpu"
@@ -36,20 +35,27 @@ func getCPUInfo(info *models.Info) error {
 	}
 
 	if len(cpuInfo) > 0 {
-		// CPU count (logical cores/threads)
-		info.CPU = fmt.Sprintf("%d", len(cpuInfo))
+		// CPU count (cores/threads)
+		// HACK: i am doing cores and threads in one single thing, TODO: split it in two different parts
+		if logical, err := cpu.Counts(true); err == nil {
+			if physical, err := cpu.Counts(false); err == nil {
+				info.CPU = fmt.Sprintf("%d cores, %d threads", physical, logical)
+			}
+		} else {
+			info.CPU = "Unknown"
+		}
 
 		// CPU model name
 		info.CPUModel = cpuInfo[0].ModelName
 
 		// Physical cores
-		info.CPUCores = strconv.Itoa(int(cpuInfo[0].Cores))
+		// info.CPUCores = strconv.Itoa(int(cpuInfo[0].Cores))
 
 		// Logical processors (threads)
-		logicalCount, err := cpu.Counts(true)
-		if err == nil {
-			info.CPUThreads = strconv.Itoa(logicalCount)
-		}
+		// logicalCount, err := cpu.Counts(true)
+		// if err == nil {
+		// 	info.CPUThreads = strconv.Itoa(logicalCount)
+		// }
 	} else {
 		info.CPU = "Unknown"
 		info.CPUModel = "Unknown"

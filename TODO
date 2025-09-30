@@ -12,6 +12,10 @@ cmd\root.go:
 
 // TODO: validate input, comes from main for now so no need to do that (validated there)
 
+internal\models\info.go:
+
+// TODO: add all of the info entries to the GetLines
+
 internal\models\color.go:
   
 // TODO: add more colors to this list, maybe move it somewhere better
