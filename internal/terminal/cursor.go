@@ -5,7 +5,7 @@ import "fmt"
 // moves the cursor to any (existing) position
 func MovCursor(row, col int) error {
 
-	w, h, err := GetFullSize()
+	h, w, err := GetFullSize()
 	if err != nil {
 		return fmt.Errorf("problem moving the cursor: %s", err)
 	}

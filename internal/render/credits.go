@@ -9,7 +9,7 @@ import (
 
 func PrintWatermark() error {
 
-	w, h, err := terminal.GetFullSize()
+	h, w, err := terminal.GetFullSize()
 	if err != nil {
 		return fmt.Errorf("%s", err)
 	}

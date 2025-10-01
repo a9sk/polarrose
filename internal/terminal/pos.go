@@ -14,12 +14,12 @@ func GetInfoPos() (int, int) {
 	// terminal height) and then use it to center the info.
 	// we also want to center the info based on the number of lines it will take
 
-	_, row, err := GetFullSize()
+	row, _, err := GetFullSize()
 	if err != nil {
 		panic("PANIC: terminal size is zero")
 	}
 
-	x, _, err := GetRoseSize()
+	_, x, err := GetRoseSize()
 	if err != nil {
 		// this should panic or we would overwrite the rose
 		panic(fmt.Sprintf("PANIC: %v", err))

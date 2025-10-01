@@ -45,9 +45,9 @@ func Root(size float64, petals int, color string) {
 	// show the system information
 	render.DrawInfo(infos)
 
-	width, height, err = terminal.GetFullSize()
+	height, width, err = terminal.GetFullSize()
 	if err != nil {
 		panic(fmt.Sprintf("[FAIL] in TERMINAL: %v", err))
 	}
-	fmt.Printf("\033[%d;%dH", height, width)
+	// fmt.Printf("\033[%d;%dH", height, width)
 }

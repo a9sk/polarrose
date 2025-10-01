@@ -9,7 +9,6 @@ import (
 
 func ClearScreen() {
 	// i need to try multiple clearing methods for better compatibility
-	// Method 3: OS-specific fallback if ANSI doesn't work
 	switch runtime.GOOS {
 	case "linux", "darwin":
 		// for Unix-like systems i try to use 'clear' command as fallback

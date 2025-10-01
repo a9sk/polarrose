@@ -65,7 +65,7 @@ func main() {
 		}
 	}
 
-	_, h, err := terminal.GetFullSize()
+	h, _, err := terminal.GetFullSize()
 	if err != nil {
 		panic(fmt.Sprintf("[FAIL] in TERMINAL: %v", err))
 	}

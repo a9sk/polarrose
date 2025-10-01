@@ -10,8 +10,7 @@ import (
 	"golang.org/x/term"
 )
 
-// TODO: spin the return around
-// returns width (col), height(row) and error if not nil
+// returns height(row), width (col) and error if not nil
 func GetFullSize() (int, int, error) {
 
 	// fd is the file descriptor for standard input
@@ -21,16 +20,16 @@ func GetFullSize() (int, int, error) {
 	// because it is not needed for the terminal size detection itself
 	// setTerminalRaw()
 
-	w, h, err := term.GetSize(fd) // standard input (stdin) sizes
+	h, w, err := term.GetSize(fd) // standard input (stdin) sizes
 	if err != nil {
 
 		// if stdin fails we can fallback to stdout
 		fd = int(os.Stdout.Fd())
-		w, h, err = term.GetSize(fd)
+		h, w, err = term.GetSize(fd)
 
 		if err == nil {
 			// if we got the size from stdout, we can return it
-			return w, h, nil
+			return h, w, nil
 		}
 
 		// maybe a panic might be good here, similar to GetRoseSize
@@ -38,15 +37,14 @@ func GetFullSize() (int, int, error) {
 		return 0, 0, fmt.Errorf("failed to get terminal size: %w", err)
 	}
 
-	// fmt.Printf("terminal size: %d x %d\n", w, h)
+	// fmt.Printf("terminal size: %d x %d\n", h, w)
 	// HACK: returns height -3 so that the new terminal input line is shown at the bottom
-	return w, h - 3, nil
+	return h - 3, w, nil
 }
 
-// TODO: spin the return around
-// returns width (col), height(row) and error if not nil
+// returns height(row), width (col) and error if not nil
 func GetRoseSize() (int, int, error) {
-	w, h, err := GetFullSize()
+	h, w, err := GetFullSize()
 
 	if err != nil {
 		// panics are pretty neat if i understand correctly
@@ -54,11 +52,10 @@ func GetRoseSize() (int, int, error) {
 		// panic(fmt.Sprintf("Error getting terminal size: %v", err))
 		return 0, 0, fmt.Errorf("failed to get rose size: %w", err)
 	}
-
-	// the width is half the terminal to leave space for sysinfo
 	// the height is 85% of the terminal so that it fits nicely
-	// return w / 2, h - (h * 15 / 100), nil
-	return w / 2, h, nil
+	// the width is half the terminal to leave space for sysinfo
+	// return h - (h * 15 / 100), w / 2, nil
+	return h, w / 2, nil
 }
 
 func setTerminalRaw() {

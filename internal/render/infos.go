@@ -14,7 +14,7 @@ func DrawInfo(infos *models.Info) {
 	col, row := terminal.GetInfoPos()
 
 	// optionally, check terminal size (not strictly needed for just printing)
-	// w, h, err := terminal.GetFullSize()
+	// h, w, err := terminal.GetFullSize()
 	// if err != nil { return }
 
 	if err := terminal.MovCursor(row, col); err != nil {
