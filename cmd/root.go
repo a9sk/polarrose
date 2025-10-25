@@ -20,7 +20,7 @@ func Root(size float64, petals int, color string) {
 	// clear the terminal before drawing
 	terminal.ClearScreen()
 
-	width, height, err := terminal.GetRoseSize()
+	height, width, err := terminal.GetRoseSize()
 	if err != nil {
 		panic(fmt.Sprintf("[FAIL] in TERMINAL: %v", err))
 	}

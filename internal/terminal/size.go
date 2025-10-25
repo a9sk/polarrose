@@ -20,12 +20,12 @@ func GetFullSize() (int, int, error) {
 	// because it is not needed for the terminal size detection itself
 	// setTerminalRaw()
 
-	h, w, err := term.GetSize(fd) // standard input (stdin) sizes
+	w, h, err := term.GetSize(fd) // standard input (stdin) sizes
 	if err != nil {
 
 		// if stdin fails we can fallback to stdout
 		fd = int(os.Stdout.Fd())
-		h, w, err = term.GetSize(fd)
+		w, h, err = term.GetSize(fd)
 
 		if err == nil {
 			// if we got the size from stdout, we can return it
@@ -39,7 +39,7 @@ func GetFullSize() (int, int, error) {
 
 	// fmt.Printf("terminal size: %d x %d\n", h, w)
 	// HACK: returns height -3 so that the new terminal input line is shown at the bottom
-	return h - 3, w, nil
+	return h - 2, w, nil
 }
 
 // returns height(row), width (col) and error if not nil

@@ -37,7 +37,7 @@ func newGridConfig(externalPoints []models.Point, padding float64) (*gridConfig,
 	}
 
 	// get terminal-calculated rose display size
-	terminalWidth, terminalHeight, err := terminal.GetRoseSize()
+	terminalHeight, terminalWidth, err := terminal.GetRoseSize()
 	if err != nil {
 		return nil, fmt.Errorf("failed to get terminal rose size for grid config: %w", err)
 	}
