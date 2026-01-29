@@ -27,6 +27,18 @@ var ColorCodes = map[string]string{
 	"reset":   "\033[0m",
 }
 
+// map color to complementary/high-contrast counterpart
+var inverseColors = map[string]string{
+	"black":   "white",
+	"white":   "black",
+	"red":     "cyan",
+	"cyan":    "red",
+	"green":   "magenta",
+	"magenta": "green",
+	"yellow":  "blue",
+	"blue":    "yellow",
+}
+
 var CurrentColor = "white"
 
 func SetColor(c string) error {
@@ -40,3 +52,11 @@ func SetColor(c string) error {
 }
 
 // TODO: add function to find inverse color (for and from background)
+func findInverse(c string) (string, error) {
+
+	if inv, ok := ColorCodes[inverseColors[c]]; ok {
+		return inv, nil
+	}
+
+	return "", fmt.Errorf("%s color does not have a supported inverse", c)
+}

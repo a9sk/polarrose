@@ -25,9 +25,6 @@ internal\render\ascii.go:
 
 internal\terminal\size.go:
 
-// TODO: spin the return around
-// TODO: have listeners for terminal size changes
-
 internal\models\info.go:
 
 // TODO: implement priority levels for Info
@@ -42,7 +39,6 @@ internal/rose/polar.go:
 
 internal/render/fill.go:
 
-// TODO: add a function that "fills" the points with ascii characters (▓▒░ or ascii art???)
-// TODO: add some way a filling that uses gradients (like a heatmap)
+// TODO: add a function that "fills" the points with ascii characters (▓▒░ or ascii art???):
 
 internal/render/infos.go:
